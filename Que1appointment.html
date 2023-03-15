@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- title page ka tab k naam me dikhata tab + / comment ka shortcut -->
+    <title>Appointment Booking</title>
+    <style>
+        /* h2, h5 class ka ek saath properties set krne k liye */
+        h2,h5{
+            background-color: yellow;
+            text-align: center;
+        }
+        form{
+            background-color: olive;
+            text-align: center;
+        }
+        .w-50{
+            width: 362px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Book a slot!</h2>
+    <h5>Chat with our representative within an hour!</h5>
+    <!-- onsubmit se jo values daale apn ne vo values submit krne k baad form se gayab nhi hote. retain rhte.
+    onsignup koi ek fuction ka naam hain aur event ek parameter jo humne niche script me define kiya hua hain -->
+    <form action="#" onsubmit="onsignup(event)">
+        <label for="myName">Name:</label><br>
+        <input type="text" name="myName" id="myName" size="100" required><br>
+
+        <label for="myEmail">Email:</label><br>
+        <input type="email" name="myEmail" id="myEmail" size="100" required><br>
+
+        <label for="myNumber">Phone Number:</label><br>
+        <input type="tel" name="myNumber" id="myNumber" size="100" required><br>
+
+        <label>Time for a call:</label><br>
+        <input type="date" name="date" class="w-50" required> <input type="time" name="time" class="w-50" required><br><br>
+        <input type="submit" value="Get a call">
+    </form>
+    <script>
+        function onsignup(event){
+            // functionName.preventDefault() values ko retain rakhne k liye 
+            event.preventDefault();
+            // console panel me browser k dekh sakte ye kya optput de rha hain toh
+            console.log(event.target.myName.value);
+        }
+    </script>
+</body>
+</html>
