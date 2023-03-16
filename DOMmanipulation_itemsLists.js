@@ -28,3 +28,11 @@ ite.style.backgroundColor = "green";
 var item3 = document.querySelector(".list-group-item:nth-child(3)");
 item3.style.visibility="hidden";
 
+var itemsall = document.querySelectorAll("li");
+
+itemsall[1].style.color = "green";
+for (let i=0; i<itemsall.length; i++){
+    if (i%2 == 0){
+        itemsall[i].style.backgroundColor = "grey";
+    }
+}
