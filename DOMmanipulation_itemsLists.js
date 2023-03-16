@@ -5,7 +5,7 @@
 let c = document.getElementById("header-title");
 let m = document.getElementById("main-header");
 console.log(c);
-c.textContent = "my name is John Wick";
+c.textContent = "John Wick killer items";
 m.style.borderBottom = "solid 3px #000";
 console.log(c.innerText);
 
@@ -14,5 +14,11 @@ let items = document.getElementsByClassName("list-group-item");
 console.log(items);
 items[1].style.fontWeight = "bold";
 items[1].style.color = "green";
+
+items[2].style.backgroundColor = "green";
+
+for (let i = 0; i < items.length; i++){
+    items[i].style.fontWeight = "bold"
+}
 
 
