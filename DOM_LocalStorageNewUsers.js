@@ -7,11 +7,11 @@ function onsignup(event){
 
     myObj = {
         "Name": name,
-        'Email': email,
+        email,
         'Phone': tel,
     }
 
-    const strObj = localStorage.setItem(myObj['Email'], JSON.stringify(myObj));
+    const strObj = localStorage.setItem(myObj.email, JSON.stringify(myObj));
 
     screenFunc(myObj);
 }
@@ -27,10 +27,26 @@ function screenFunc(myObj){
     delBtn.type = 'button';
     delBtn.value = 'Delete';
     delBtn.onclick = () => {
-        localStorage.removeItem(myObj['Email']);
+        localStorage.removeItem(myObj.email);
         ul.removeChild(childEle);
     }
 
+    const editBtn = document.createElement('input');
+    editBtn.type = 'button';
+    editBtn.value = "Edit";
+    editBtn.onclick = () => {
+        localStorage.removeItem(myObj.email);
+        ul.removeChild(childEle);
+
+        // below code is only new to that of the delete button
+        // is code k vagah se vo written me values form me aa jaayegi
+        document.getElementById('myName').value = myObj['Name'];
+        document.getElementById('exampleInputEmail1').value = myObj.email;
+        document.getElementById('tel').value = myObj['Phone'];
+    }
+
+
+    childEle.append(editBtn);
     childEle.append(delBtn);
     ul.appendChild(childEle);
 
