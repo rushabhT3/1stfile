@@ -5,22 +5,34 @@ function onsignup(event){
     const email = event.target.exampleInputEmail1.value;
     const tel = event.target.tel.value;
 
-    // object kisibhi form me bana sakte ek key-value pair me banaya maine aur 2 just variables me
-    const myObj = {
+    myObj = {
         "Name": name,
-        email,
-        tel,
+        'Email': email,
+        'Phone': tel,
     }
 
-    localStorage.setItem(myObj.email, JSON.stringify(myObj));
+    const strObj = localStorage.setItem(myObj['Email'], JSON.stringify(myObj));
 
-    showUsersOnTheScreen(myObj);
+    screenFunc(myObj);
 }
-function showUsersOnTheScreen(myObj){
-    const paraEle = document.getElementById("listOfItems");
-    const childEle = document.createElement("li");
 
-    // below is a string
-    childEle.textContent = myObj["Name"] + "--" + myObj.email + "--" + myObj.tel;
-    paraEle.appendChild(childEle);
+function screenFunc(myObj){
+    const ul = document.getElementById('listOfItems');
+
+    const childEle = document.createElement('li');
+    childEle.innerHTML = JSON.stringify(myObj);
+
+    // 'input' tag and onclick method
+    const delBtn = document.createElement('input');
+    delBtn.type = 'button';
+    delBtn.value = 'Delete';
+    delBtn.onclick = () => {
+        localStorage.removeItem(myObj['Email']);
+        ul.removeChild(childEle);
+    }
+
+    childEle.append(delBtn);
+    ul.appendChild(childEle);
+
+    
 }
