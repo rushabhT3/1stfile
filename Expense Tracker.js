@@ -15,6 +15,7 @@ function onsignup(event){
 
     screenFunc(myObj);
 }
+
 function screenFunc(myObj){
     const ul = document.getElementById('items');
 
