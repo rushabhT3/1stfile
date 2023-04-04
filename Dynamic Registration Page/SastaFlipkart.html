@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sasta Flipkart</title>
+</head>
+<body>
+    <form action="#" onsubmit="onSignUp(event)">
+        <label for="Price">Price</label>
+        <input type="number" id="Price">
+
+        <label for="Product">Product Name</label>
+        <input type="text" id="Product">
+
+        <label for="Category">Pick Category</label>
+        <select id="Category">
+            <option>Food</option>
+            <option>Electronics</option>
+            <option>Body Care</option>
+        </select>
+
+        <input type="submit" value="Add Product">
+    </form>
+
+    <h3 id = "Electronics">Electronic Items:</h3>
+    <h3 id = "Food">Food Items:</h3>
+    <h3 id = "SkinCare">Skin Care Items:</h3>
+
+</body>
+    <script src="SastaFlipkart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script>
+</html>
