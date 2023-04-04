@@ -38,6 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
 // Object.keys(localStorage).forEach((item) => {
 //     onScreenFunction(JSON.parse(localStorage[item]));
 // })
+})
+// Object.keys(localStorage).forEach((item) => {
+//     onScreenFunction(JSON.parse(localStorage[item]));
+// })
 // })
 
 function onScreenFunction(myObj) {
@@ -50,6 +54,17 @@ function onScreenFunction(myObj) {
     delBtn.value = 'Delete';
     delBtn.type = 'button';
     delBtn.onclick = () => {
+        //     localStorage.removeItem(myObj.description);
+        //     ul.removeChild(li);
+        // }
+        const url = `https://crudcrud.com/api/5eb35da1b0cc4728a7119b6b9084b5de/ExpenseTrackerNew/${myObj._id}`;
+        axios.delete(url)
+            .then(() => {
+                ul.removeChild(li);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
         //     localStorage.removeItem(myObj.description);
         //     ul.removeChild(li);
         // }
