@@ -22,6 +22,19 @@ function onsignup(event) {
         });
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    axios.get('https://crudcrud.com/api/35837f618b0a4848a71dbb7fd1565ebf/ExpenseTracker')
+        .then((response) => {
+            console.log(response);
+            response.data.forEach((element) => {
+                onScreenFunction(element);
+            })
+        })
+        .catch((err) => {
+            console.error(err)
+        })
+})
+
 function onScreenFunction(myObj) {
     const ul = document.getElementById('onScreenItems');
     const li = document.createElement('li');
