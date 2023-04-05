@@ -11,6 +11,7 @@ function onsignup(event) {
         category
     };
 
+    if (expense && description && category){
     axios.post('https://crudcrud.com/api/35837f618b0a4848a71dbb7fd1565ebf/ExpenseTracker', myObj)
         .then((response) => {
             onScreenFunction(myObj);
@@ -20,6 +21,9 @@ function onsignup(event) {
             document.body.innerHTML = document.body.innerHTML + '<h4>Kuchh toh Gadbad Hain Daya</h4>';
             console.log(err);
         });
+    } else {
+        alert('kindly enter all the details please')
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
