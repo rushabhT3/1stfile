@@ -13,7 +13,7 @@ async function onSignUp(event) {
 
     if (price && product && category) {
         try {
-            const response = await axios.post(`https://crudcrud.com/api/b6697b95144b49ba9007cb8f5b5a2a17/SastaFlipkart`, myObj);
+            const response = await axios.post(`https://crudcrud.com/api/4613d2e92c2f44b5a784015651ba69e3/SastaFlipkart`, myObj);
             const newObj = response.data;
             onScreenFunction(newObj);
         } catch (error) {
@@ -26,7 +26,7 @@ async function onSignUp(event) {
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        const resolve = await axios.get(`https://crudcrud.com/api/b6697b95144b49ba9007cb8f5b5a2a17/SastaFlipkart`);
+        const resolve = await axios.get(`https://crudcrud.com/api/4613d2e92c2f44b5a784015651ba69e3/SastaFlipkart`);
         resolve.data.forEach(element => {
             onScreenFunction(element);
         });
@@ -48,7 +48,7 @@ async function onScreenFunction(myObj) {
     delBtn.value = 'Delete Order';
     delBtn.onclick = async () => {
         try {
-            await axios.delete(`https://crudcrud.com/api/b6697b95144b49ba9007cb8f5b5a2a17/SastaFlipkart/${myObj._id}`);
+            await axios.delete(`https://crudcrud.com/api/4613d2e92c2f44b5a784015651ba69e3/SastaFlipkart/${myObj._id}`);
             if (myObj.category == 'Electronics') {
                 ulElectronics.removeChild(li);
             }
