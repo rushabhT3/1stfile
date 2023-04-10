@@ -5,7 +5,7 @@ async function onSignUp(event) {
     const product = event.target.Product.value;
     const category = event.target.Category.value;
 
-    myObj = {
+    const myObj = {
         price,
         product,
         category
@@ -13,20 +13,20 @@ async function onSignUp(event) {
 
     if (price && product && category) {
         try {
-            const response = await axios.post(`https://crudcrud.com/api/4613d2e92c2f44b5a784015651ba69e3/SastaFlipkart`, myObj);
+            const response = await axios.post(`https://crudcrud.com/api/93f54bdb73d943ad884e0eee06002b51/SastaFlipkart`, myObj);
             const newObj = response.data;
             onScreenFunction(newObj);
         } catch (error) {
             console.error(error);
         }
     } else {
-        alert('Enter All the Details')
+        alert('Enter All the Details');
     }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        const resolve = await axios.get(`https://crudcrud.com/api/4613d2e92c2f44b5a784015651ba69e3/SastaFlipkart`);
+        const resolve = await axios.get(`https://crudcrud.com/api/93f54bdb73d943ad884e0eee06002b51/SastaFlipkart`);
         resolve.data.forEach(element => {
             onScreenFunction(element);
         });
@@ -35,20 +35,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-async function onScreenFunction(myObj) {
+function onScreenFunction(myObj) {
     const ulElectronics = document.getElementById('Electronics');
     const ulFood = document.getElementById('Food');
     const ulSkinCare = document.getElementById('SkinCare');
 
     const li = document.createElement('li');
     li.innerHTML = `<small>${myObj.price} - ${myObj.product} - ${myObj.category}</small>`;
+    li.style.fontSize = '16px';
+
 
     const delBtn = document.createElement('input');
     delBtn.type = 'button';
     delBtn.value = 'Delete Order';
     delBtn.onclick = async () => {
         try {
-            await axios.delete(`https://crudcrud.com/api/4613d2e92c2f44b5a784015651ba69e3/SastaFlipkart/${myObj._id}`);
+            await axios.delete(`https://crudcrud.com/api/93f54bdb73d943ad884e0eee06002b51/SastaFlipkart/${myObj._id}`);
             if (myObj.category == 'Electronics') {
                 ulElectronics.removeChild(li);
             }
@@ -65,15 +67,12 @@ async function onScreenFunction(myObj) {
     li.appendChild(delBtn);
 
     if (myObj.category == 'Electronics') {
-        li.style.fontSize = '16px';
         ulElectronics.appendChild(li);
     }
     if (myObj.category == 'Food') {
-        li.style.fontSize = '16px';
         ulFood.appendChild(li);
     }
     if (myObj.category == 'Body Care') {
-        li.style.fontSize = '16px';
         ulSkinCare.appendChild(li);
     }
 }
