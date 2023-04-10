@@ -12,19 +12,23 @@ function onsignup(event) {
     }
 
     // localStorage.setItem(myObj.description, JSON.stringify(myObj));
-    axios.post('https://crudcrud.com/api/5eb35da1b0cc4728a7119b6b9084b5de/ExpenseTrackerNew', myObj)
-        .then((resolve) => {
-            onScreenFunction(myObj);
-            console.log(resolve);
-        })
-        .catch((err) => {
-            console.error(err);
-        })
-    // onScreenFunction(myObj);
+    if (expense && description && category) {
+        axios.post('https://crudcrud.com/api/3ec4f73486c74564ac22444e9a78b319/ExpenseTrackerNew', myObj)
+            .then((resolve) => {
+                onScreenFunction(myObj);
+                console.log(resolve);
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+        // onScreenFunction(myObj);
+    } else {
+        alert('Enter All the things please');
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    axios.get('https://crudcrud.com/api/5eb35da1b0cc4728a7119b6b9084b5de/ExpenseTrackerNew')
+    axios.get('https://crudcrud.com/api/3ec4f73486c74564ac22444e9a78b319/ExpenseTrackerNew')
         .then((response) => {
             console.log(response);
             response.data.forEach((element) => {
@@ -57,7 +61,7 @@ function onScreenFunction(myObj) {
         //     localStorage.removeItem(myObj.description);
         //     ul.removeChild(li);
         // }
-        const url = `https://crudcrud.com/api/5eb35da1b0cc4728a7119b6b9084b5de/ExpenseTrackerNew/${myObj._id}`;
+        const url = `https://crudcrud.com/api/3ec4f73486c74564ac22444e9a78b319/ExpenseTrackerNew/${myObj._id}`;
         axios.delete(url)
             .then(() => {
                 ul.removeChild(li);
@@ -65,32 +69,49 @@ function onScreenFunction(myObj) {
             .catch((err) => {
                 console.error(err);
             });
-        }
+    }
 
     const editBtn = document.createElement('input');
     editBtn.value = 'Edit';
     editBtn.type = 'button';
     editBtn.onclick = () => {
-        // localStorage.removeItem(myObj.description);
-        // ul.removeChild(li);
 
-        // document.getElementById('Expense').value = myObj.expense;
-        // document.getElementById('Description').value = myObj.description;
-        // document.getElementById('Category').value = myObj.category;
-        axios.delete(`https://crudcrud.com/api/5eb35da1b0cc4728a7119b6b9084b5de/ExpenseTrackerNew/${myObj._id}`)
-        .then(() => {
-            ul.removeChild(li);
-        })
-        .catch((err) => {
-            console.error(err);
-        })
         document.getElementById('Expense').value = myObj.expense;
         document.getElementById('Description').value = myObj.description;
         document.getElementById('Category').value = myObj.category;
+
+        axios.delete(`https://crudcrud.com/api/3ec4f73486c74564ac22444e9a78b319/ExpenseTrackerNew/${myObj._id}`)
+            .then(() => {
+                ul.removeChild(li);
+            })
+            .error((err) => {
+                console.error(err);
+            })
     };
 
     li.appendChild(editBtn);
     li.appendChild(delBtn);
     ul.appendChild(li);
 }
-  
+
+
+// var editingItemId = null;
+
+// handleSubmit = (event) => {
+//   // whatever you're doing keep it
+
+//   if (editingItemId === null) {
+//     axios.post()
+//   } else {
+//     axios.put(`crudcrud_url/${editingItemId}`, obj)
+//     editingItemId = null;
+//   }
+// }
+
+
+// editBtn.onClick = function() {
+//   // populate the form inputs with the prev data
+//   // dont need to delete crudcrud
+//   editingItemId = item.id;
+//   removeFremScreen(item.id)
+// }

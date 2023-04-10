@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sasta FlipKart!</title>
+</head>
+
+<body>
+    <form action="#" onsubmit="onSignUp(event)">
+
+        <label for="Expense">Expense</label>
+        <input type="number" id="Expense">
+
+        <label for="Selection">Pick Your Poison</label>
+        <select id="Selection">
+            <option>Food</option>
+            <option>Skin</option>
+            <option>Electrical</option>
+        </select>
+
+        <input type="submit" value="Add Item">
+    </form>
+
+    <ul id="FoodWala">Food</ul>
+    <ul id="SkinWala">Skin</ul>
+    <ul id="LineWala">Electrical</ul>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.5/axios.min.js"></script>
+    <script>
+        async function onSignUp(event) {
+            console.log('chal rha hain');
+            event.preventDefault();
+
+            const expense = event.target.Expense.value;
+            const selection = event.target.Selection.value;
+
+            const myObj = {
+                expense,
+                selection
+            }
+
+            if (expense && selection) {
+                try {
+                    const respose = await axios.post('https://crudcrud.com/api/af1820ad3d934fcc9aa881cf8eab6373/SastaAmazon', myObj);
+                    const newData = respose.data;
+                    onScreenFunction(newData);
+                } catch (error) {
+                    console.error(error);
+                }
+            } else {
+                alert('Enter all the details');
+            }
+        }
+        document.addEventListener("DOMContentLoaded", async () => {
+            try {
+                const respose = await axios.get(`https://crudcrud.com/api/af1820ad3d934fcc9aa881cf8eab6373/SastaAmazon`);
+                respose.data.forEach(element => {
+                    onScreenFunction(element);
+                });
+            } catch (error) {
+                console.error(error);
+            }
+        })
+
+
+        async function onScreenFunction(myObj) {
+            const ulFood = document.getElementById('FoodWala');
+            const ulSkin = document.getElementById('SkinWala');
+            const ulLine = document.getElementById('LineWala');
+
+            const li = document.createElement('li');
+            li.innerHTML = `${myObj.expense}--${myObj.selection}`;
+
+            const delBtn = document.createElement('input');
+            delBtn.value = 'Delete';
+            delBtn.type = 'button';
+            delBtn.onclick = async () => {
+                try {
+                    await axios.delete(`https://crudcrud.com/api/af1820ad3d934fcc9aa881cf8eab6373/SastaAmazon/${myObj._id}`);
+
+                    if (myObj.selection == 'Food') {
+                        ulFood.removeChild(li);
+                    }
+                    if (myObj.selection == 'Skin') {
+                        ulSkin.removeChild(li);
+                    }
+                    if (myObj.selection == 'Electrical') {
+                        ulLine.removeChild(li);
+                    }
+                } catch (error) {
+                    console.error('kuchh toh gadbad hain Daya');
+                }
+            };
+
+            if (myObj.selection == 'Food') {
+                ulFood.appendChild(li);
+            }
+            if (myObj.selection == 'Skin') {
+                ulSkin.appendChild(li);
+            }
+            if (myObj.selection == 'Electrical') {
+                ulLine.appendChild(li);
+            }
+
+            li.appendChild(delBtn);
+        }
+
+
+    </script>
+
+</body>
+
+</html>
